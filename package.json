@@ -1,0 +1,27 @@
+{
+	"name": "auth-service-via-passport",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"engines": {
+		"node": "22.11.0"
+	},
+	"dependencies": {
+		"auth-service-via-passport": "file:",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"ejs": "^3.1.10",
+		"express": "^4.21.1",
+		"mongoose": "^8.8.2",
+		"morgan": "^1.10.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.7"
+	}
+}
