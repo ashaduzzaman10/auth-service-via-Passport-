@@ -1,18 +1,84 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const ejs = require("ejs");
+const path = require("path");
 
 const app = express();
 
 // Application middleware
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Root route
-app.get("/", (req, res) => {
+// routes
+
+// user register route (get)
+
+app.get("/register", (req, res) => {
+	res.render("register");
+});
+
+// user register route (post)
+app.post("/register", (req, res) => {
+	try {
+		res.status(201).json({
+			success: true,
+			data: {
+				message: "user created successfully ",
+			},
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			data: {
+				error: error.message,
+			},
+		});
+	}
+});
+
+// user login route (get)
+app.get("/login", (req, res) => {
+	res.render("login");
+});
+
+// user login route (post)
+app.post("/login", (req, res) => {
+	try {
+		res.status(200).json({
+			success: true,
+			data: {
+				message: "user login successfully",
+			},
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			data: {
+				error: error.message,
+			},
+		});
+	}
+});
+
+// user logout route (post)
+app.get("/logout", (req, res) => {
+	res.redirect("/");
+});
+
+// user profile route (get) --> for authenticate user can access only (protected)
+app.get("/profile", (req, res) => {
+	res.render("profile");
+});
+
+//health route
+
+app.get("/health", (req, res) => {
 	res.status(200).json({
 		success: true,
 		data: {
@@ -21,6 +87,10 @@ app.get("/", (req, res) => {
 	});
 });
 
+// Root route
+app.get("/", (req, res) => {
+	res.render("index");
+});
 
 // error handler
 
